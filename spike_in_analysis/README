@@ -1,0 +1,58 @@
+=========== REAMDE.txt ==========
+This help file contains instructions for generating the spike-in as used in the manuscript:
+Ha, G. et al. TITAN: inference of copy number architectures in clonal cell populations from tumor whole-genome sequence data. Genome Res. 24, 1881–1893 (2014).
+
+=========== Usage of createSpikeInSample.R ============
+This script will generate a full sample, containing 23 chromosomes, with spike-ins for 4 chromosomes originating from specified regions of loss and gain.
+
+R --vanilla --args [file_list.txt] [regions.txt] [numEvents] [output_dir] < createSpikeInSample.R
+
+
+===========  file_list.txt ===========
+File with 3-column tab-delimited format:
+1) ID, 2) Log ratio filename, 3) Allelic ratio filename
+See below for example formats for each type of file
+
+Example:
+DG1136a_tum100	DG1136a_gcMapCor.reads	DG1136a.txt
+DG1136a_tum60-norm40	DG1136a_tum60-norm40_gcMapCor.reads	DG1136a_tum60-norm40.txt
+DG1136a_tum80-norm20	DG1136a_tum80-norm40_gcMapCor.reads	DG1136a_tum80-norm40.txt
+
+===========  regions.txt ===========
+Type	Chr	Start	Stop
+DEL	16	46464733	90173515
+AMP	8	97045605	144155272
+
+Note that the simulated events will only be inserted into these chromosomes: 1,2,9,18
+To change this, you need to modify the R script in line 103
+chrs <- c(1,2,9,18)
+
+===========  numEvents ===========
+The number of events for each of DEL and AMP and for each mixture (see file_list.txt)
+For the TITAN manuscript, 4 was used for this argument.
+Note that the large (10kb) events only have 1 event.
+
+sampleSize <- c(rep(10,numEvents),rep(100,numEvents),rep(1000,numEvents),rep(10000,1))
+
+
+
+========= DG1136a_tum60-norm40_gcMapCor.reads ========
+This is basically a tab-delimited version of the wig file but with the computed logR (tumour/normal).
+
+chr     start   end     logR
+1       1       1000    NA
+1       1001    2000    NA
+1       2001    3000    NA
+
+========= DG1136a_tum60-norm40.txt =========
+This file is the allele counts input file that is in the format specified for TITAN.
+
+1       1000   T       4       C       4
+1       1002   G       6       C       7
+1       1004   A       16      G       15
+1       1006   A       18      G       21
+1       1008   T       2       G       6
+1       1010   T       11      C       10
+
+
+
