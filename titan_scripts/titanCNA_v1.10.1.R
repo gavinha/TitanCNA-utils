@@ -32,7 +32,8 @@ option_list <- list(
 	make_option(c("-os", "--outSeg"), type = "character", help = "Output file to write detailed segments"),
 	make_option(c("-oi", "--outIGV"), type = "character", help = "Output file to write segments for loading into IGV"),
 	make_option(c("-op", "--outParam"), type = "character", help = "Output file to write parameters"),
-	make_option(c("--outPlotDir"), type = "character", help = "Output directory to save plots.")
+	make_option(c("--outPlotDir"), type = "character", help = "Output directory to save plots."),
+	make_option(c("--createSegsPerlScript"), type = "character", default = "createTITANsegmentfiles.pl", help = "Perl script to create segment file.")
 )
 
 parseobj <- OptionParser(option_list=option_list)
@@ -40,10 +41,12 @@ opt <- parse_args(parseobj)
 print(opt)
 
 libdir <- opt$libdir
-source(paste0(libdir, "/v1.10.1/R/plotting.R"))
-source(paste0(libdir, "/v1.10.1/R/utils.R"))
-createSeg <- paste0(libdir, "/v1.10.1/createTITANsegmentfiles.pl")
-
+source(paste0(libdir, "R/plotting.R"))
+source(paste0(libdir, "R/utils.R"))
+createSeg <- opt$createSegsPerlScript #paste0(libdir, "/createTITANsegmentfiles.pl")
+if (!file.exists(createSeg)){
+	stop("--createSegsPerlScript: Perl script cannot be found.")
+}
 id <- opt$id
 hetfile <- opt$hetFile
 cnfile <- opt$cnFile
