@@ -14,11 +14,12 @@ The easiest way to generate these files is by using the downloadable pipeline [K
 
 **Running the R script**  
 
-1. Clone the git repo and locate the folder containing the Rscript  
+1. Clone the git repo and locate the folder containing the Rscript
   ```
   git clone git@github.com:gavinha/TitanCNA-utils.git
-  cd TitanCNA-utils/titan_scripts/  
-  ```  
+  cd TitanCNA-utils/titan_scripts/
+  ```
+
 2. Look at the usage of the R script  
   ```
   # from the command line
