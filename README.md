@@ -14,11 +14,12 @@ The easiest way to generate these files is by using the downloadable pipeline [K
 
 **Running the R script**  
 
-1. Clone the git repo and locate the folder containing the Rscript  
+1. Clone the git repo and locate the folder containing the Rscript
   ```
   git clone git@github.com:gavinha/TitanCNA-utils.git
-  cd TitanCNA-utils/titan_scripts/  
-  ```  
+  cd TitanCNA-utils/titan_scripts/
+  ```
+
 2. Look at the usage of the R script  
   ```
   # from the command line
@@ -68,7 +69,7 @@ The easiest way to generate these files is by using the downloadable pipeline [K
   # allelic read count file: test.het.txt
   Rscript titanCNA_v1.10.1.R --id test --hetFile test.het.txt --cnFile test.cn.txt \
     --numClusters 1 --numCores 1 --normal_0 0.5 --ploidy_0 2 \
-    --chrs "c(1:22, \"X\")" --estimateNormal TRUE --estimatePloidy TRUE --outDir ./
+    --chrs "c(1:22, \"X\")" --estimatePloidy TRUE --outDir ./
   ```
   Additional arguments to consider are the following:  
     These arguments can be used to tune the model based on variance in the read coverage data and data-type (whole-exome sequencing or whole-genome sequencing).
